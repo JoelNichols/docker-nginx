@@ -1,11 +1,13 @@
 docker-nginx
 ============
 
+Forked from kyma/docker-nginx
+
 A high-performance Nginx base image for Docker to serve static websites. It will serve anything in the `/var/www` directory.
 
 To build a Docker image for your site, you'll need to create a `Dockerfile`. For example, if your site is in a directory called `src/`, you could create this `Dockerfile`:
 
-    FROM kyma/docker-nginx
+    FROM joelnichols/docker-nginx
     COPY src/ /var/www
     CMD 'nginx'
 
@@ -19,22 +21,11 @@ Then build and run it:
     $ curl localhost
     ...
 
+If you want to use custom nginx configs, just copy them into /etc/nginx/sites-enabled and they'll work.
+
 Docker Hub
 ----------
-The trusted build information can be found on the Docker Hub at https://registry.hub.docker.com/u/kyma/docker-nginx/.
-
-SSL
----
-
-To use SSL, put your certs in `/etc/nginx/ssl` and enable the `default-ssl` site:
-
-    ADD server.crt /etc/nginx/ssl/
-    ADD server.key /etc/nginx/ssl/
-    RUN ln -s /etc/nginx/sites-available/default-ssl /etc/nginx/sites-enabled/default-ssl
-
-When you run it, you'll want to make port 443 available, e.g.:
-
-    $ docker run -p 80:80 -p 443:443 -d mysite
+The trusted build information can be found on the Docker Hub at https://registry.hub.docker.com/u/joelnichols/docker-nginx/.
 
 
 nginx.conf
